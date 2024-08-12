@@ -3,7 +3,13 @@
 </script>
 
 <template>
-  <p></p>
+  <header></header>
+  <main>
+      
+  </main>
+  <footer>
+
+  </footer>
 </template>
 
 <style scoped>
