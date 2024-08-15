@@ -31,6 +31,7 @@ import GroundShow from './components/GroundShow.vue';
   </header>
   <main>
       <GroundShow></GroundShow>
+      <div id="article_summarys"></div>
       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </main>
   <footer id="ifooter">
@@ -41,26 +42,33 @@ import GroundShow from './components/GroundShow.vue';
 
 <style scoped>
 main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#article_summarys{
   width: 70%;
   display: flex;
   flex-direction: column;
-  position: relative;
   align-items: center;
-  justify-content: center;
 }
 #nav{
   display: flex;
   flex-direction: row;
-  width: 70%;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  left:15%;
   padding:5px 10px;
+  background-color: aliceblue;
 }
 
 #nav-left{
   width: 350px;
+  position:relative;
+  left:15%;
 }
 
 #nav-mid{
@@ -74,6 +82,8 @@ main{
 }
 #nav-right{
   width: 350px;
+  position:relative;
+  right:15%;
 }
 
 #ifooter{
@@ -82,5 +92,8 @@ main{
   gap:10px;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  background-color: black;
+  color:white;
 }
 </style>

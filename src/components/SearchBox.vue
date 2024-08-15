@@ -66,11 +66,11 @@
     #search-box:hover{
         width: 300px;
         border-color: rgb(0,0,0,1);
-        animation: box-extend 1s ease-in-out forwards;
+        animation: box-extend 0.6s ease-in-out forwards;
     }
 
     .animation-shrink{
-        animation:box-shrink 1s ease-in-out;
+        animation:box-shrink 0.6s ease-in-out;
     }
 
     @keyframes box-extend{
