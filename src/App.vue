@@ -6,9 +6,9 @@ import GroundShow from './components/GroundShow.vue';
 <template>
   <header id="nav">
     <div id="nav-left">
-      <img>
+      <img src="/head.svg"/>
       <div>
-
+          ReBlog
       </div>
     </div>  
     <div id="nav-mid">
@@ -62,19 +62,33 @@ main{
   justify-content: space-between;
   position: fixed;
   padding:5px 10px;
-  background-color: aliceblue;
+  background-color: rgb(255, 255, 255);
+  z-index: 999;
+  border-bottom: 1px solid rgba(136, 136, 136, 0.3);
 }
 
 #nav-left{
   width: 350px;
   position:relative;
   left:15%;
+  display: flex;
+  gap:20px;
+}
+
+#nav-left img{
+  width: 30px;
+  height:30px;
+
+}
+
+#nav-left div{
+  font-weight: bold;
 }
 
 #nav-mid{
   display: flex;
   flex-direction: row;
-  gap:10px 20px;
+  gap:40px;
   position: relative;
   width: 300px;
   align-items: center;
@@ -83,7 +97,7 @@ main{
 #nav-right{
   width: 350px;
   position:relative;
-  right:15%;
+  right:5%;
 }
 
 #ifooter{
