@@ -5,7 +5,8 @@
     <div id="gs">
         <div id="gd">
             <div id="words">
-
+                野狗不需要墓碑<br/>
+                狂奔到腐烂就好
             </div>
             <div id="next-button">
 
@@ -29,7 +30,25 @@
         width: 100%;
         height:100vh;
         background-size:cover;
-        background-position:center
+        background-position:center;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    #words{
+        font-size: xx-large;
+        font-weight: bold;
+        align-items: center;
+        text-align: center;
+        color:white;
+        position: absolute;
+        left:0;
+        top:35%;
+        width: 100%;
+        height: auto;
+        z-index: 5;
+        letter-spacing: 5px;
     }
 
     #mask{
