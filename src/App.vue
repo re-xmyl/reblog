@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import SearchBox from './components/SearchBox.vue';
 import GroundShow from './components/GroundShow.vue';
+import { onMounted } from 'vue';
 //平滑滚动
 const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end; 
 const damp = (x: number, y: number, lambda: number, dt: number) => lerp(x, y, 1 - Math.exp(-lambda * dt))
 class smroll{
+    lastTime:number
     curPos:number
-    lenis:number
+    lerp:number
     toPos:number
     isRunning:Boolean
     content:HTMLElement
-    constructor(lenis = 0.1){
-      this.lenis = lenis
+    constructor(lp = 0.1){
+      this.lastTime = performance.now()
+      this.lerp = lp
       this.toPos = 0
       this.isRunning = false
       this.content = document.documentElement
@@ -20,14 +23,54 @@ class smroll{
         e.preventDefault()
         this.isRunning = true
         this.toPos = this.curPos + e.deltaY
-      })
+        let maxHeight = this.content.scrollHeight - this.content.clientHeight
+        if(this.toPos < 0 ){
+          this.toPos = 0
+        }
+        else if(this.toPos > maxHeight){
+          this.toPos = maxHeight
+        }
+      },{passive:false})
     }
 
     update(value:number){
         this.content.scrollTop = value
+        this.curPos = value
     }
 
+    advance(dt:number){
+      let cp = false
+      let value = 0
+      value = damp(this.curPos, this.toPos, this.lerp * 60, dt)
+      if(Math.round(value) === Math.round(this.toPos)){
+        cp = true
+      }
+      this.update(value)
+      if(cp) this.isRunning = false
+    }
+
+    raf(time:number){
+      let dt:number
+      if(!this.isRunning) {
+        this.lastTime = time
+        return
+      }
+      else{
+          dt = time - this.lastTime
+          this.lastTime = time
+      }
+      this.advance(dt*0.001)
+    }
 }
+
+onMounted(()=>{
+  let sl = new smroll()
+  function raf(time:number){
+    sl.raf(time)
+    requestAnimationFrame(raf)
+  }
+  requestAnimationFrame(raf)
+})
 
 </script>
 
