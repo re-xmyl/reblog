@@ -9,7 +9,9 @@
                 狂奔到腐烂就好
             </div>
             <div id="next-button">
-
+                <a>
+                    <img src="/next.svg" alt="next"/>
+                </a>
             </div>
         </div>
         <div id="mask">
@@ -37,8 +39,7 @@
     }
 
     #words{
-        font-size: xx-large;
-        font-weight: bold;
+        font-size: 63px;
         align-items: center;
         text-align: center;
         color:white;
@@ -49,6 +50,36 @@
         height: auto;
         z-index: 5;
         letter-spacing: 5px;
+        font-family: STXingkai;
+    }
+
+    #next-button{
+        width: 100%;
+        height: auto;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 5;
+        text-align: center;
+    }
+
+    #next-button a img{
+        width: 40px;
+        height: 40px;
+        margin-bottom: 15px;
+        animation: animate-next 1s linear infinite alternate;
+    }
+
+
+    @keyframes animate-next {
+        0% {
+            opacity:1;
+        }    
+        100%{
+            opacity:0.2;
+            transform: translateY(10px);
+        }
     }
 
     #mask{

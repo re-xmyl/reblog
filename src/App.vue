@@ -1,6 +1,34 @@
 <script setup lang="ts">
 import SearchBox from './components/SearchBox.vue';
 import GroundShow from './components/GroundShow.vue';
+//平滑滚动
+const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end; 
+const damp = (x: number, y: number, lambda: number, dt: number) => lerp(x, y, 1 - Math.exp(-lambda * dt))
+class smroll{
+    curPos:number
+    lenis:number
+    toPos:number
+    isRunning:Boolean
+    content:HTMLElement
+    constructor(lenis = 0.1){
+      this.lenis = lenis
+      this.toPos = 0
+      this.isRunning = false
+      this.content = document.documentElement
+      this.curPos = this.content.scrollTop
+      this.content.addEventListener("wheel",(e)=>{
+        e.preventDefault()
+        this.isRunning = true
+        this.toPos = this.curPos + e.deltaY
+      })
+    }
+
+    update(value:number){
+        this.content.scrollTop = value
+    }
+
+}
+
 </script>
 
 <template>
@@ -35,8 +63,8 @@ import GroundShow from './components/GroundShow.vue';
       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </main>
   <footer id="ifooter">
-    <div>Copyright © 2024 Re.Blog</div> 
-    <div><strong style="font-weight: bold;">QQ:</strong>841189483 &nbsp;&nbsp;&nbsp;<strong style="font-weight: bold;">Email:</strong>841189483@qq.com</div>
+    <div class="footer-words">Copyright © 2024 Re.Blog</div> 
+    <div class="footer-words"><strong style="font-weight: bold;">QQ:</strong>841189483 &nbsp;&nbsp;&nbsp;<strong style="font-weight: bold;">Email:</strong>841189483@qq.com</div>
   </footer>
 </template>
 
@@ -46,6 +74,33 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.nav-word{
+  border: solid 3px white;
+  border-radius: 4px;
+
+}
+
+.nav-word a{
+  font-weight: bold;
+  font-size: 15px;
+  color: #2c3e50;
+}
+
+.nav-word:hover{
+  border-bottom: solid 3px black;
+  transition: border-color 0.3s ease-in ;
+}
+
+.nav-word a:hover{
+  color:black;
+  transition: color 0.3s ease-in;
+}
+
+
+.footer-words{
+  color: #cecbcb;
 }
 
 #article_summarys{
@@ -86,6 +141,7 @@ main{
 }
 
 #nav-mid{
+  left:-10px;
   display: flex;
   flex-direction: row;
   gap:40px;
@@ -97,7 +153,7 @@ main{
 #nav-right{
   width: 350px;
   position:relative;
-  right:5%;
+  right:7%;
 }
 
 #ifooter{
@@ -109,5 +165,6 @@ main{
   width: 100%;
   background-color: black;
   color:white;
+  padding: 10px 0;
 }
 </style>
