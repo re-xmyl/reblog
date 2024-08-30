@@ -7,7 +7,6 @@ const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + am
 const damp = (x: number, y: number, lambda: number, dt: number) => lerp(x, y, 1 - Math.exp(-lambda * dt))
 class smroll{
     lastTime:number
-    curPos:number
     lerp:number
     toPos:number
     isRunning:Boolean
@@ -15,14 +14,13 @@ class smroll{
     constructor(lp = 0.1){
       this.lastTime = performance.now()
       this.lerp = lp
-      this.toPos = 0
       this.isRunning = false
       this.content = document.documentElement
-      this.curPos = this.content.scrollTop
+      this.toPos = this.content.scrollTop
       this.content.addEventListener("wheel",(e)=>{
         e.preventDefault()
         this.isRunning = true
-        this.toPos = this.curPos + e.deltaY
+        this.toPos = this.toPos + e.deltaY
         let maxHeight = this.content.scrollHeight - this.content.clientHeight
         if(this.toPos < 0 ){
           this.toPos = 0
@@ -35,18 +33,22 @@ class smroll{
 
     update(value:number){
         this.content.scrollTop = value
-        this.curPos = value
     }
 
     advance(dt:number){
       let cp = false
       let value = 0
-      value = damp(this.curPos, this.toPos, this.lerp * 60, dt)
+      value = damp(this.content.scrollTop, this.toPos, this.lerp * 60, dt)
+      console.log(Math.round(value))
+      console.log(Math.round(this.toPos))
       if(Math.round(value) === Math.round(this.toPos)){
         cp = true
       }
       this.update(value)
-      if(cp) this.isRunning = false
+      if(cp) {
+        this.isRunning = false
+        console.log("yes")
+      }
     }
 
     raf(time:number){
