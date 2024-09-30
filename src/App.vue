@@ -39,8 +39,8 @@ class smroll{
       let cp = false
       let value = 0
       value = damp(this.content.scrollTop, this.toPos, this.lerp * 60, dt)
-      console.log(Math.round(value))
-      console.log(Math.round(this.toPos))
+      console.log("value:",Math.round(value))
+      console.log("toPos:",Math.round(this.toPos))
       if(Math.round(value) === Math.round(this.toPos)){
         cp = true
       }
