@@ -39,15 +39,24 @@ class smroll{
       let cp = false
       let value = 0
       value = damp(this.content.scrollTop, this.toPos, this.lerp * 60, dt)
-      console.log("value:",Math.round(value))
-      console.log("toPos:",Math.round(this.toPos))
+      const cv = value - this.content.scrollTop
+      const fnsign = 0.7
+      if(cv > 0 && cv < fnsign){
+        const a1 = this.content.scrollTop + fnsign
+        value =  a1 > this.toPos ? this.toPos : a1
+      }
+      else if(cv < 0 && cv > - fnsign){
+        const d1 = this.content.scrollTop - fnsign
+        value = d1 < this.toPos ? this.toPos : d1
+      }
+
       if(Math.round(value) === Math.round(this.toPos)){
         cp = true
       }
       this.update(value)
       if(cp) {
-        this.isRunning = false
         console.log("yes")
+        this.isRunning = false
       }
     }
 
